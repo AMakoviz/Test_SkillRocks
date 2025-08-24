@@ -5,9 +5,9 @@ spring:
   application:
     name: TestPTMK
   datasource:
-    url: jdbc:postgresql://localhost:5432/test_SkillRocks
-    username: postgres
-    password: 1901magic
+    url:
+    username:
+    password:
   jpa:
     hibernate:
       ddl-auto: update
