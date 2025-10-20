@@ -53,7 +53,10 @@ public class UserServiceImpl implements UserService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void delete (UUID id) {
         findById(id);
-        userRepository.deleteById(id);
+        if (checkId(id)){
+            userRepository.deleteById(id);
+        }
+
     }
 
     @Override
@@ -61,5 +64,9 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> findByFio (String fio) {
         List<UserEntity> list = userRepository.findByFio(fio);
         return list.stream().map(userMapper::entityToDto).collect(Collectors.toList());
+    }
+
+    private boolean checkId(UUID id) {
+        return id != null;
     }
 }
