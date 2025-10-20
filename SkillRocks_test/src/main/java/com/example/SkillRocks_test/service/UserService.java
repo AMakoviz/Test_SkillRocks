@@ -1,5 +1,7 @@
 package com.example.SkillRocks_test.service;
 import com.example.SkillRocks_test.dto.UserDto;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -9,4 +11,5 @@ public interface UserService {
     Optional<UserDto> findById(UUID id);
     Optional<UserDto> update(UserDto userDto);
     void delete (UUID id);
+    List<UserDto> findByFio (String fio);
 }

@@ -1,6 +1,7 @@
 package com.example.SkillRocks_test.service;
 
 import com.example.SkillRocks_test.dto.UserDto;
+import com.example.SkillRocks_test.entity.UserEntity;
 import com.example.SkillRocks_test.repository.UserRepository;
 import com.example.SkillRocks_test.util.UserMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -53,6 +56,13 @@ public class UserServiceImpl implements UserService {
         if (checkId(id)){
             userRepository.deleteById(id);
         }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public List<UserDto> findByFio (String fio) {
+        List<UserEntity> list = userRepository.findByFio(fio);
+        return list.stream().map(userMapper::entityToDto).collect(Collectors.toList());
     }
 
     private boolean checkId(UUID id) {
