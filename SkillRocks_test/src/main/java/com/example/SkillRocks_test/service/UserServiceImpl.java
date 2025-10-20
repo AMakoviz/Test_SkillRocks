@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
         if (checkId(id)){
             userRepository.deleteById(id);
         }
+
     }
 
     @Override
