@@ -68,13 +68,4 @@ public class UserServiceImpl implements UserService {
     private boolean checkId(UUID id) {
         return id != null;
     }
-    private boolean checkId(UUID id) {
-        return id != null;
-    }
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public List<UserDto> findByFio (String fio) {
-        List<UserEntity> list = userRepository.findByFio(fio);
-        return list.stream().map(userMapper::entityToDto).collect(Collectors.toList());
-    }
 }
