@@ -50,9 +50,12 @@ public class UserServiceImpl implements UserService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void delete (UUID id) {
         findById(id);
-        userRepository.deleteById(id);
+        if (checkId(id)){
+            userRepository.deleteById(id);
+        }
     }
 
-
-
+    private boolean checkId(UUID id) {
+        return id != null;
+    }
 }
