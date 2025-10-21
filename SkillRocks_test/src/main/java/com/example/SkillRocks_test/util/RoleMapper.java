@@ -5,7 +5,6 @@ import com.example.SkillRocks_test.entity.RoleEntity;
 import com.example.SkillRocks_test.model.RoleModel;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class RoleMapper {
 
@@ -36,6 +35,4 @@ public class RoleMapper {
                 .roleName(model.getRoleName())
                 .build();
     }
-
-
 }

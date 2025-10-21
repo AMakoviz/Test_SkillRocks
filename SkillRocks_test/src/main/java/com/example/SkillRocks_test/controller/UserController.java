@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -33,6 +34,14 @@ public class UserController {
                 .map(userMapper::dtoToModel)
                 .map(ResponseEntity::ok)
                 .orElseThrow();
+    }
+
+    @GetMapping(path = "/users", produces = "application/json")
+    @Operation(summary = "Получение пользователя по ФИО", description = "Возвращает информацию о пользователе и его роли по переданному ФИО. В случае, если пользователя с таким идентификатором не существует, будет возвращена ошибка 404")
+    public List<UserModel> getUsersByFio(@RequestParam String fio) {
+        return userService.findByFio(fio).stream()
+                .map(userMapper::dtoToModel)
+                .toList();
     }
 
     @PostMapping(path = "/createNewUser", consumes = "application/json", produces = "application/json")
